@@ -1,4 +1,4 @@
-package ru.nikshlykov.schoolhelper.db.note;
+package ru.nikshlykov.schoolhelper.db.daos;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -9,6 +9,8 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
+
+import ru.nikshlykov.schoolhelper.db.entities.Note;
 
 @Dao
 public interface NoteDao {

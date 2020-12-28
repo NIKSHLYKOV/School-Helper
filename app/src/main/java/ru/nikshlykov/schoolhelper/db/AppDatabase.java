@@ -15,8 +15,8 @@ import ru.nikshlykov.schoolhelper.db.entities.LessonNumber;
 import ru.nikshlykov.schoolhelper.db.entities.Pupil;
 import ru.nikshlykov.schoolhelper.db.entities.Subject;
 import ru.nikshlykov.schoolhelper.db.entities.User;
-import ru.nikshlykov.schoolhelper.db.note.Note;
-import ru.nikshlykov.schoolhelper.db.note.NoteDao;
+import ru.nikshlykov.schoolhelper.db.entities.Note;
+import ru.nikshlykov.schoolhelper.db.daos.NoteDao;
 
 @Database(entities = {Note.class, Class.class, DayOfWeek.class, Lesson.class,
 LessonNumber.class, Pupil.class, Subject.class, User.class}, version = 1, exportSchema = false)

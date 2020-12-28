@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ru.nikshlykov.schoolhelper.R;
-import ru.nikshlykov.schoolhelper.db.note.Note;
+import ru.nikshlykov.schoolhelper.db.entities.Note;
 
 
 public class NotesRecyclerViewAdapter extends RecyclerView.Adapter<NotesRecyclerViewAdapter.NoteViewHolder> {

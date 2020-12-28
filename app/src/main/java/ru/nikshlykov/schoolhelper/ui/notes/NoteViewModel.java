@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import ru.nikshlykov.schoolhelper.db.NotesRepository;
-import ru.nikshlykov.schoolhelper.db.note.Note;
+import ru.nikshlykov.schoolhelper.db.entities.Note;
 
 public class NoteViewModel extends AndroidViewModel {
 

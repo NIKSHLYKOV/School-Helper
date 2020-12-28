@@ -7,8 +7,8 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import ru.nikshlykov.schoolhelper.db.note.Note;
-import ru.nikshlykov.schoolhelper.db.note.NoteDao;
+import ru.nikshlykov.schoolhelper.db.entities.Note;
+import ru.nikshlykov.schoolhelper.db.daos.NoteDao;
 
 public class NotesRepository {
 

@@ -1,4 +1,4 @@
-package ru.nikshlykov.schoolhelper.db.note;
+package ru.nikshlykov.schoolhelper.db.entities;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;

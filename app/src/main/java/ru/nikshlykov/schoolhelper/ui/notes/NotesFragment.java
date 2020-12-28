@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import ru.nikshlykov.schoolhelper.R;
-import ru.nikshlykov.schoolhelper.db.note.Note;
+import ru.nikshlykov.schoolhelper.db.entities.Note;
 import ru.nikshlykov.schoolhelper.ui.OnFragmentInteractionListener;
 import ru.nikshlykov.schoolhelper.ui.adapters.NotesRecyclerViewAdapter;
 
