@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/fragment_schedule___recycler_view___lessons"
+                android:id="@+id/fragment_day_schedule___recycler_view___lessons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </FrameLayout>

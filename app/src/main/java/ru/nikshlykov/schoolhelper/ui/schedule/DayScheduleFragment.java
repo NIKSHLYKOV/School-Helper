@@ -18,20 +18,40 @@ import ru.nikshlykov.schoolhelper.ui.adapters.LessonsRecyclerViewAdapter;
 import ru.nikshlykov.schoolhelper.ui.models.Lesson;
 import ru.nikshlykov.schoolhelper.ui.notes.NotesFragment;
 
-public class ScheduleFragment extends Fragment {
+public class DayScheduleFragment extends Fragment {
+    public static final String ARG_DAY_OF_WEEK = "ARG_DAY_OF_WEEK";
 
     private LessonsRecyclerViewAdapter adapter;
     private RecyclerView lessonsRecyclerView;
 
-    private ScheduleViewModel scheduleViewModel;
+    private DayScheduleViewModel dayScheduleViewModel;
+
+    private int dayOfWeek;
+
+    public static DayScheduleFragment newInstance(int dayOfWeek) {
+        Bundle args = new Bundle();
+        args.putInt(ARG_DAY_OF_WEEK, dayOfWeek);
+        DayScheduleFragment fragment = new DayScheduleFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle args = getArguments();
+        if (args != null){
+            dayOfWeek = args.getInt(ARG_DAY_OF_WEEK);
+        }
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        scheduleViewModel =
-                new ViewModelProvider(this).get(ScheduleViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_schedule, container, false);
+        dayScheduleViewModel =
+                new ViewModelProvider(this).get(DayScheduleViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_day_schedule, container, false);
 
-        lessonsRecyclerView = root.findViewById(R.id.fragment_schedule___recycler_view___lessons);
+        lessonsRecyclerView = root.findViewById(R.id.fragment_day_schedule___recycler_view___lessons);
         return root;
     }
 
@@ -48,7 +68,7 @@ public class ScheduleFragment extends Fragment {
         lessonsRecyclerView.setAdapter(adapter);
         lessonsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        scheduleViewModel.getLessons().observe(getViewLifecycleOwner(), lessons -> {
+        dayScheduleViewModel.getLessons(dayOfWeek).observe(getViewLifecycleOwner(), lessons -> {
             if (lessons != null) {
                 for (Lesson lesson : lessons) {
                     Log.d(NotesFragment.class.getCanonicalName(), lesson.id + " " + lesson.subjectName);
