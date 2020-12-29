@@ -1,6 +1,9 @@
 package ru.nikshlykov.schoolhelper.ui.notes;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,9 +12,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +32,7 @@ public class NotesFragment extends Fragment {
     private NotesRecyclerViewAdapter adapter;
     private RecyclerView notesRecyclerView;
     private FloatingActionButton addNoteFAB;
+    private Drawable deleteIcon;
 
     private NotesViewModel notesViewModel;
 
@@ -51,6 +57,8 @@ public class NotesFragment extends Fragment {
 
         notesRecyclerView = root.findViewById(R.id.fragment_notes___recycler_view___notes);
         addNoteFAB = root.findViewById(R.id.fragment_notes___fab___add_note);
+        deleteIcon = ContextCompat.getDrawable(getContext(), R.drawable.ic_baseline_delete_24);
+
         return root;
     }
 
@@ -84,6 +92,9 @@ public class NotesFragment extends Fragment {
             }
         });
 
+        new ItemTouchHelper(new SwipeDeleteCallback(0, ItemTouchHelper.LEFT))
+                .attachToRecyclerView(notesRecyclerView);
+
         notesViewModel.getNotes().observe(getViewLifecycleOwner(), notes -> {
             if (notes != null) {
                 for (Note note : notes) {
@@ -99,5 +110,58 @@ public class NotesFragment extends Fragment {
             NavDirections navDirections = NotesFragmentDirections.actionNavNotesToNavNote();
             onFragmentInteractionListener.onFragmentInteraction(navDirections);
         });
+    }
+
+    private class SwipeDeleteCallback extends ItemTouchHelper.SimpleCallback {
+
+        public SwipeDeleteCallback(int dragDirs, int swipeDirs) {
+            super(dragDirs, swipeDirs);
+        }
+
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int direction) {
+            final Note note = adapter.getNoteAt(viewHolder.getAdapterPosition());
+            if (direction == ItemTouchHelper.LEFT) {
+                notesViewModel.deleteNote(note);
+            }
+        }
+
+        @Override
+        public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView,
+                                @NonNull RecyclerView.ViewHolder viewHolder,
+                                float dX, float dY, int actionState,
+                                boolean isCurrentlyActive) {
+            View itemView = viewHolder.itemView;
+            ColorDrawable swipeBackground = new ColorDrawable();
+
+            int deleteIconMargin = (itemView.getHeight() - deleteIcon.getIntrinsicHeight()) / 2;
+
+            if (dX < 0) {
+                swipeBackground.setColor(ContextCompat.getColor(getContext(),
+                        R.color.swipe_delete));
+                swipeBackground.setBounds(
+                        itemView.getRight() + (int) dX,
+                        itemView.getTop(),
+                        itemView.getRight(),
+                        itemView.getBottom());
+            }
+            swipeBackground.draw(c);
+
+            if (dX < 0) {
+                deleteIcon.setBounds(
+                        itemView.getRight() - deleteIconMargin - deleteIcon.getIntrinsicWidth(),
+                        itemView.getTop() + deleteIconMargin,
+                        itemView.getRight() - deleteIconMargin,
+                        itemView.getBottom() - deleteIconMargin);
+                deleteIcon.draw(c);
+            }
+
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+        }
     }
 }

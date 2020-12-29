@@ -38,12 +38,12 @@ public class NotesRepository {
     }
 
     public void update(Note note) {
-        new UpdateModeAsyncTask(noteDao).execute(note);
+        new UpdateNoteAsyncTask(noteDao).execute(note);
     }
-    private static class UpdateModeAsyncTask extends AsyncTask<Note, Void, Void> {
+    private static class UpdateNoteAsyncTask extends AsyncTask<Note, Void, Void> {
         private NoteDao noteDao;
 
-        private UpdateModeAsyncTask(NoteDao noteDao) {
+        private UpdateNoteAsyncTask(NoteDao noteDao) {
             this.noteDao = noteDao;
         }
 
@@ -67,10 +67,27 @@ public class NotesRepository {
 
         @Override
         protected Long doInBackground(Note... notes) {
-            long newNoteId = noteDao.getNoteWithMaxId().id + 1;
+            long newNoteId = noteDao.getCount() + 1;
             Note note = notes[0];
             note.id = newNoteId;
             return noteDao.insert(note);
+        }
+    }
+
+    public void delete(Note note){
+        new DeleteNoteAsyncTask(noteDao).execute(note);
+    }
+    private static class DeleteNoteAsyncTask extends AsyncTask<Note, Void, Void> {
+        private NoteDao noteDao;
+
+        private DeleteNoteAsyncTask(NoteDao noteDao) {
+            this.noteDao = noteDao;
+        }
+
+        @Override
+        protected Void doInBackground(Note... notes) {
+            noteDao.delete(notes[0]);
+            return null;
         }
     }
 }

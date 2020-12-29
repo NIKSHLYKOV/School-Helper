@@ -76,4 +76,8 @@ public class NotesRecyclerViewAdapter extends RecyclerView.Adapter<NotesRecycler
     public List<Note> getNotes() {
         return notes;
     }
+
+    public Note getNoteAt(int position) {
+        return notes.get(position);
+    }
 }
