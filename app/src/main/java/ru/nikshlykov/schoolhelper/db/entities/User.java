@@ -42,4 +42,8 @@ public class User {
     @NonNull
     @ColumnInfo(name = "PupilId")
     public long pupilId;
+
+    @NonNull
+    @ColumnInfo(name = "ClassId")
+    public long classId;
 }

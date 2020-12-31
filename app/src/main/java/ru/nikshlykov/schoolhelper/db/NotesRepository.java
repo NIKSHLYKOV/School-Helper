@@ -29,8 +29,8 @@ public class NotesRepository {
         return instance;
     }
 
-    public LiveData<List<Note>> getLiveDataNotes() {
-        return noteDao.getLiveDataNotes();
+    public LiveData<List<Note>> getLiveDataNotes(long userId) {
+        return noteDao.getLiveDataNotes(userId);
     }
 
     public LiveData<Note> getLiveDataNoteById(long noteId) {
@@ -54,8 +54,8 @@ public class NotesRepository {
         }
     }
 
-    public void insert(String name, String text) {
-        Note newNote = new Note(name, text);
+    public void insert(String name, String text, long userId) {
+        Note newNote = new Note(name, text, userId);
         new InsertNoteAsyncTask(noteDao).execute(newNote);
     }
     private static class InsertNoteAsyncTask extends AsyncTask<Note, Void, Long> {

@@ -28,7 +28,7 @@ public class LessonsRepository {
         return instance;
     }
 
-    public LiveData<List<Lesson>> getLiveDataLessons(int dayOfWeek) {
-        return lessonDao.getLiveDataLessons(dayOfWeek);
+    public LiveData<List<Lesson>> getLiveDataLessons(long classId, int dayOfWeek) {
+        return lessonDao.getLiveDataLessons(classId, dayOfWeek);
     }
 }

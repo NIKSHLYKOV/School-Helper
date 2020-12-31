@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+import ru.nikshlykov.schoolhelper.App;
 import ru.nikshlykov.schoolhelper.db.LessonsRepository;
 import ru.nikshlykov.schoolhelper.ui.models.Lesson;
 
@@ -20,6 +21,7 @@ public class DayScheduleViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Lesson>> getLessons(int dayOfWeek) {
-        return lessonsRepository.getLiveDataLessons(dayOfWeek);
+        long classId = ((App)getApplication()).getUser().classId;
+        return lessonsRepository.getLiveDataLessons(classId, dayOfWeek);
     }
 }

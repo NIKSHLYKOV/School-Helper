@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import ru.nikshlykov.schoolhelper.App;
 import ru.nikshlykov.schoolhelper.db.NotesRepository;
 import ru.nikshlykov.schoolhelper.db.entities.Note;
 
@@ -36,7 +37,8 @@ public class NoteViewModel extends AndroidViewModel {
             note.text = noteText;
             notesRepository.update(note);
         } else {
-            notesRepository.insert(noteName, noteText);
+            long userId = ((App)getApplication()).getUser().id;
+            notesRepository.insert(noteName, noteText, userId);
         }
     }
 }

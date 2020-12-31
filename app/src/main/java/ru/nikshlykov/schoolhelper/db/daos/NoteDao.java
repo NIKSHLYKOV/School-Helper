@@ -24,10 +24,10 @@ public interface NoteDao {
     @Delete
     int delete(Note note);
 
-    @Query("SELECT * FROM Notes")
-    LiveData<List<Note>> getLiveDataNotes();
+    @Query("SELECT * FROM Notes WHERE UserId == :userId")
+    LiveData<List<Note>> getLiveDataNotes(long userId);
 
-    @Query("SELECT * FROM Notes WHERE Id = :noteId")
+    @Query("SELECT * FROM Notes WHERE Id == :noteId")
     LiveData<Note> getLiveDataNoteById(long noteId);
 
     @Query("SELECT COUNT(Id) FROM Notes")

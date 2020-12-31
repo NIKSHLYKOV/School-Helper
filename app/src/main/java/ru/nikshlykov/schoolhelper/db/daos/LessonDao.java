@@ -20,6 +20,6 @@ public interface LessonDao {
             "INNER JOIN Classes c ON c.Id == l.ClassId\n" +
             "INNER JOIN DaysOfWeek dow ON dow.Id == l.DayOfWeekId\n" +
             "INNER JOIN LessonNumbers ln ON ln.Id == l.LessonNumberId\n" +
-            "WHERE c.Id == 7 AND dow.Id == :dayOfWeek")
-    LiveData<List<Lesson>> getLiveDataLessons(int dayOfWeek);
+            "WHERE c.Id == :classId AND dow.Id == :dayOfWeek")
+    LiveData<List<Lesson>> getLiveDataLessons(long classId, int dayOfWeek);
 }
