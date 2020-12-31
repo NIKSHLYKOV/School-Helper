@@ -6,6 +6,8 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import org.jetbrains.annotations.NotNull;
+
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "Users",
@@ -16,6 +18,13 @@ import static androidx.room.ForeignKey.CASCADE;
                 onDelete = CASCADE,
                 onUpdate = CASCADE))
 public class User {
+
+    public User(long id, @NotNull String nickname, @NotNull String password, long pupilId){
+        this.id = id;
+        this.nickname = nickname;
+        this.password = password;
+        this.pupilId = pupilId;
+    }
 
     @PrimaryKey()
     @NonNull

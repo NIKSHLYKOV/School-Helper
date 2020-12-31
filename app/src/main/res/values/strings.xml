@@ -10,4 +10,7 @@
     <string name="menu_notes">Заметки</string>
     <string name="menu_schedule">Расписание</string>
     <string name="menu_note">Заметка</string>
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="sign_in">Войти</string>
 </resources>
