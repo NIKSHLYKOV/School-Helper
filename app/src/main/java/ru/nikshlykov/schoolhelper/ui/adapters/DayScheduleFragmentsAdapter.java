@@ -10,8 +10,8 @@ import ru.nikshlykov.schoolhelper.ui.schedule.DayScheduleFragment;
 
 public class DayScheduleFragmentsAdapter extends FragmentPagerAdapter {
 
-    final int PAGES_COUNT = 5;
-    private String tabTitles[] = new String[] { "Пн", "Вт", "Ср", "Чт", "Пт" };
+    final int PAGES_COUNT = 6;
+    private String tabTitles[] = new String[] { "Пн", "Вт", "Ср", "Чт", "Пт", "Сб" };
 
     public DayScheduleFragmentsAdapter(@NonNull FragmentManager fm) {
         super(fm);
