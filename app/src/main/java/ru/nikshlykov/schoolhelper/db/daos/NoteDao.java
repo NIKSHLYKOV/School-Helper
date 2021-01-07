@@ -30,6 +30,6 @@ public interface NoteDao {
     @Query("SELECT * FROM Notes WHERE Id == :noteId")
     LiveData<Note> getLiveDataNoteById(long noteId);
 
-    @Query("SELECT COUNT(Id) FROM Notes")
-    int getCount();
+    @Query("SELECT max(Id) FROM Notes")
+    int getMaxId();
 }

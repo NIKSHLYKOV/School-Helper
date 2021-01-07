@@ -67,7 +67,7 @@ public class NotesRepository {
 
         @Override
         protected Long doInBackground(Note... notes) {
-            long newNoteId = noteDao.getCount() + 1;
+            long newNoteId = noteDao.getMaxId() + 1;
             Note note = notes[0];
             note.id = newNoteId;
             return noteDao.insert(note);
