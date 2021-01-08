@@ -19,7 +19,11 @@
         android:id="@+id/nav_schedule"
         android:name="ru.nikshlykov.schoolhelper.ui.schedule.WeekScheduleFragment"
         android:label="@string/menu_schedule"
-        tools:layout="@layout/fragment_week_schedule" />
+        tools:layout="@layout/fragment_week_schedule" >
+        <action
+            android:id="@+id/action_nav_schedule_to_homeworkFragment"
+            app:destination="@id/nav_homework" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_note"
@@ -33,5 +37,19 @@
         <action
             android:id="@+id/action_nav_note_to_nav_notes"
             app:destination="@id/nav_notes" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_homework"
+        android:name="ru.nikshlykov.schoolhelper.ui.schedule.HomeworkFragment"
+        android:label="@string/homework"
+        tools:layout="@layout/fragment_homework">
+        <action
+            android:id="@+id/action_homeworkFragment_to_nav_schedule"
+            app:destination="@id/nav_schedule" />
+        <argument
+            android:name="lessonId"
+            app:argType="long"
+            android:defaultValue="0L" />
     </fragment>
 </navigation>

@@ -1,11 +1,8 @@
 package ru.nikshlykov.schoolhelper.ui;
 
 import android.os.Bundle;
-import android.view.View;
 import android.view.Menu;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -58,6 +55,14 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
 
     @Override
     public void onFragmentInteraction(NavDirections navDirections) {
-        navController.navigate(navDirections);
+        switch (navDirections.getActionId()){
+            case R.id.action_nav_note_to_nav_notes:
+            case R.id.action_homeworkFragment_to_nav_schedule:
+                navController.popBackStack();
+                break;
+            default:
+                navController.navigate(navDirections);
+                break;
+        }
     }
 }

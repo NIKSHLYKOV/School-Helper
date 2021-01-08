@@ -68,13 +68,13 @@ public class AuthFragment extends Fragment {
             switch (status){
                 case -1:
                     Toast.makeText(getContext(), "Неправильный логин или пароль!", Toast.LENGTH_SHORT).show();
-                    signInButton.setEnabled(true);
                     break;
                 case 1:
                     NavDirections navDirections = AuthFragmentDirections.actionAuthFragmentToMainActivity();
                     onFragmentInteractionListener.onFragmentInteraction(navDirections);
                     break;
             }
+            signInButton.setEnabled(true);
         });
     }
 }

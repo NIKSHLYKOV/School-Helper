@@ -19,6 +19,8 @@ public class LessonsRecyclerViewAdapter extends RecyclerView.Adapter<LessonsRecy
 
     private List<Lesson> lessons;
 
+    private OnEntryClickListener onEntryClickListener;
+
     public LessonsRecyclerViewAdapter(){ }
 
     @Override
@@ -26,7 +28,7 @@ public class LessonsRecyclerViewAdapter extends RecyclerView.Adapter<LessonsRecy
         return (lessons != null) ? lessons.size() : 0;
     }
 
-    class NoteViewHolder extends RecyclerView.ViewHolder{
+    class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private final TextView timeTextView;
         private final TextView subjectNameTextView;
@@ -36,6 +38,13 @@ public class LessonsRecyclerViewAdapter extends RecyclerView.Adapter<LessonsRecy
 
             timeTextView = itemView.findViewById(R.id.lesson_item___text_view___time);
             subjectNameTextView = itemView.findViewById(R.id.lesson_item___text_view___subject_name);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            onEntryClickListener.onEntryClick(view, getLayoutPosition());
         }
     }
 
@@ -55,8 +64,16 @@ public class LessonsRecyclerViewAdapter extends RecyclerView.Adapter<LessonsRecy
         holder.subjectNameTextView.setText(lesson.subjectName);
     }
 
+    public void setOnEntryClickListener(OnEntryClickListener onEntryClickListener) {
+        this.onEntryClickListener = onEntryClickListener;
+    }
+
     public void setLessons(List<Lesson> lessons) {
         this.lessons = lessons;
         notifyDataSetChanged();
+    }
+
+    public Lesson getLessonAt(int position) {
+        return lessons.get(position);
     }
 }

@@ -1,6 +1,8 @@
 package ru.nikshlykov.schoolhelper.ui.schedule;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +13,14 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import ru.nikshlykov.schoolhelper.R;
+import ru.nikshlykov.schoolhelper.ui.OnFragmentInteractionListener;
 import ru.nikshlykov.schoolhelper.ui.adapters.LessonsRecyclerViewAdapter;
+import ru.nikshlykov.schoolhelper.ui.models.Lesson;
 
 public class DayScheduleFragment extends Fragment {
     public static final String ARG_DAY_OF_WEEK = "ARG_DAY_OF_WEEK";
@@ -29,12 +34,26 @@ public class DayScheduleFragment extends Fragment {
 
     private int dayOfWeek;
 
+    private OnFragmentInteractionListener onFragmentInteractionListener;
+
     public static DayScheduleFragment newInstance(int dayOfWeek) {
+        Log.i(DayScheduleFragment.class.getCanonicalName(), "newInstance()");
         Bundle args = new Bundle();
         args.putInt(ARG_DAY_OF_WEEK, dayOfWeek);
         DayScheduleFragment fragment = new DayScheduleFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            onFragmentInteractionListener =
+                    (OnFragmentInteractionListener) getActivity();
+        } else {
+            throw new RuntimeException(getActivity().toString() + " must implement OnFragmentInteractionListener");
+        }
     }
 
     @Override
@@ -61,12 +80,19 @@ public class DayScheduleFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        Log.i(DayScheduleFragment.class.getCanonicalName(), "onViewCreated()");
         initRecyclerViewWithAdapter();
     }
 
     private void initRecyclerViewWithAdapter() {
         adapter = new LessonsRecyclerViewAdapter();
+        adapter.setOnEntryClickListener((view, position) -> {
+            final Lesson currentLesson = adapter.getLessonAt(position);
+            NavDirections navDirections = WeekScheduleFragmentDirections
+                    .actionNavScheduleToHomeworkFragment()
+                    .setLessonId(currentLesson.id);
+            onFragmentInteractionListener.onFragmentInteraction(navDirections);
+        });
 
         lessonsRecyclerView.setAdapter(adapter);
         lessonsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

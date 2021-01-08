@@ -1,6 +1,7 @@
 package ru.nikshlykov.schoolhelper.ui.schedule;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +17,14 @@ import ru.nikshlykov.schoolhelper.ui.adapters.DayScheduleFragmentsAdapter;
 
 public class WeekScheduleFragment extends Fragment {
 
+    private ViewPager viewPager;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        Log.i(DayScheduleFragment.class.getCanonicalName(), "onCreateView() WeekScheduleFragment");
         View root = inflater.inflate(R.layout.fragment_week_schedule, container, false);
 
-        ViewPager viewPager = root.findViewById(R.id.fragment_week_schedule___view_pager);
+        viewPager = root.findViewById(R.id.fragment_week_schedule___view_pager);
         viewPager.setAdapter(
                 new DayScheduleFragmentsAdapter(getActivity().getSupportFragmentManager()));
 
@@ -28,5 +32,11 @@ public class WeekScheduleFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
 
         return root;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        viewPager.setAdapter(null);
     }
 }

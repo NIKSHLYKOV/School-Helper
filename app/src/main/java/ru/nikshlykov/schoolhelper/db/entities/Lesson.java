@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import static androidx.room.ForeignKey.CASCADE;
@@ -36,4 +35,7 @@ public class Lesson {
     @NonNull
     @ColumnInfo(name = "LessonNumberId")
     public long lessonNumberId;
+
+    @ColumnInfo(name = "Homework")
+    public String homework;
 }
