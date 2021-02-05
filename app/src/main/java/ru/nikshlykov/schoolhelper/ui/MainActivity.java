@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         switch (navDirections.getActionId()){
             case R.id.action_nav_note_to_nav_notes:
             case R.id.action_homeworkFragment_to_nav_schedule:
+            case R.id.action_editDayScheduleFragment_to_nav_schedule:
                 navController.popBackStack();
                 break;
             default:

@@ -68,7 +68,7 @@ public class NotesFragment extends Fragment {
 
         initRecyclerViewWithAdapter();
 
-        initSaveButton();
+        initAddNoteFAB();
     }
 
     private void initRecyclerViewWithAdapter() {
@@ -105,7 +105,7 @@ public class NotesFragment extends Fragment {
         });
     }
 
-    private void initSaveButton() {
+    private void initAddNoteFAB() {
         addNoteFAB.setOnClickListener(view -> {
             NavDirections navDirections = NotesFragmentDirections.actionNavNotesToNavNote();
             onFragmentInteractionListener.onFragmentInteraction(navDirections);

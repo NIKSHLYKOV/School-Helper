@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_nav_schedule_to_homeworkFragment"
             app:destination="@id/nav_homework" />
+        <action
+            android:id="@+id/action_nav_schedule_to_editDayScheduleFragment"
+            app:destination="@id/nav_edit_day_schedule" />
     </fragment>
 
     <fragment
@@ -51,5 +54,17 @@
             android:name="lessonId"
             app:argType="long"
             android:defaultValue="0L" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_edit_day_schedule"
+        android:name="ru.nikshlykov.schoolhelper.ui.schedule.EditDayScheduleFragment"
+        android:label="Редактирование дня"
+        tools:layout="@layout/fragment_edit_day_schedule">
+        <action
+            android:id="@+id/action_editDayScheduleFragment_to_nav_schedule"
+            app:destination="@id/nav_schedule" />
+        <argument
+            android:name="dayOfWeek"
+            app:argType="integer" />
     </fragment>
 </navigation>

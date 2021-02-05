@@ -17,6 +17,8 @@ import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import ru.nikshlykov.schoolhelper.R;
 import ru.nikshlykov.schoolhelper.ui.OnFragmentInteractionListener;
 import ru.nikshlykov.schoolhelper.ui.adapters.LessonsRecyclerViewAdapter;
@@ -29,6 +31,7 @@ public class DayScheduleFragment extends Fragment {
     private RecyclerView lessonsRecyclerView;
     private CardView lessonsCardView;
     private TextView lessonsAreNotExistTextView;
+    private FloatingActionButton editDayScheduleFAB;
 
     private DayScheduleViewModel dayScheduleViewModel;
 
@@ -74,6 +77,8 @@ public class DayScheduleFragment extends Fragment {
         lessonsRecyclerView = root.findViewById(R.id.fragment_day_schedule___recycler_view___lessons);
         lessonsCardView = root.findViewById(R.id.fragment_day_schedule___card_view___lessons);
         lessonsAreNotExistTextView = root.findViewById(R.id.fragment_day_schedule___text_view___there_are_not_lessons);
+        editDayScheduleFAB = root.findViewById(R.id.fragment_day_schedule___fab___edit);
+
         return root;
     }
 
@@ -82,33 +87,65 @@ public class DayScheduleFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Log.i(DayScheduleFragment.class.getCanonicalName(), "onViewCreated()");
         initRecyclerViewWithAdapter();
+
+        initEditDayScheduleFAB();
     }
 
     private void initRecyclerViewWithAdapter() {
         adapter = new LessonsRecyclerViewAdapter();
         adapter.setOnEntryClickListener((view, position) -> {
             final Lesson currentLesson = adapter.getLessonAt(position);
-            NavDirections navDirections = WeekScheduleFragmentDirections
-                    .actionNavScheduleToHomeworkFragment()
-                    .setLessonId(currentLesson.id);
-            onFragmentInteractionListener.onFragmentInteraction(navDirections);
+            if (!currentLesson.subjectName.equals("-")) {
+                NavDirections navDirections = WeekScheduleFragmentDirections
+                        .actionNavScheduleToHomeworkFragment()
+                        .setLessonId(currentLesson.id);
+                onFragmentInteractionListener.onFragmentInteraction(navDirections);
+            }
         });
 
         lessonsRecyclerView.setAdapter(adapter);
         lessonsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         dayScheduleViewModel.getLessons(dayOfWeek).observe(getViewLifecycleOwner(), lessons -> {
-            if (lessons != null) {
-                if (lessons.size() > 0) {
-                    lessonsCardView.setVisibility(View.VISIBLE);
-                    lessonsAreNotExistTextView.setVisibility(View.GONE);
-                    adapter.setLessons(lessons);
-                }
-                else {
-                    lessonsCardView.setVisibility(View.GONE);
-                    lessonsAreNotExistTextView.setVisibility(View.VISIBLE);
+            if (lessons == null){
+                showLessonsAreNotExistInfo();
+                return;
+            }
+
+            if (lessons.size() == 0){
+                showLessonsAreNotExistInfo();
+                return;
+            }
+
+            boolean lessonsAreNotExist = true;
+            for (Lesson lesson: lessons){
+                if (!lesson.subjectName.equals("-")){
+                    lessonsAreNotExist = false;
+                    break;
                 }
             }
+
+            if (lessonsAreNotExist) {
+                showLessonsAreNotExistInfo();
+                return;
+            }
+
+            lessonsCardView.setVisibility(View.VISIBLE);
+            lessonsAreNotExistTextView.setVisibility(View.GONE);
+            adapter.setLessons(lessons);
+
+        });
+    }
+
+    private void showLessonsAreNotExistInfo(){
+        lessonsCardView.setVisibility(View.GONE);
+        lessonsAreNotExistTextView.setVisibility(View.VISIBLE);
+    }
+
+    private void initEditDayScheduleFAB() {
+        editDayScheduleFAB.setOnClickListener(view -> {
+            NavDirections navDirections = WeekScheduleFragmentDirections.actionNavScheduleToEditDayScheduleFragment(dayOfWeek);
+            onFragmentInteractionListener.onFragmentInteraction(navDirections);
         });
     }
 }

@@ -81,8 +81,6 @@ public class HomeworkFragment extends Fragment {
             imm.hideSoftInputFromWindow(saveButton.getWindowToken(),
                     InputMethodManager.HIDE_NOT_ALWAYS);
 
-            // TODO Сделать popBackStack() в MainActivity. Иначе будет кнопка назад не так работать,
-            //  т.к. фрагемты будут добавляться в стек.
             NavDirections navDirections = HomeworkFragmentDirections.actionHomeworkFragmentToNavSchedule();
             onFragmentInteractionListener.onFragmentInteraction(navDirections);
         });

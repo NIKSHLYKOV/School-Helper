@@ -7,6 +7,7 @@ import androidx.room.Update;
 
 import java.util.List;
 
+import ru.nikshlykov.schoolhelper.db.entities.Subject;
 import ru.nikshlykov.schoolhelper.ui.models.Lesson;
 
 @Dao
@@ -14,6 +15,9 @@ public interface LessonDao {
 
     @Update
     int update(ru.nikshlykov.schoolhelper.db.entities.Lesson lesson);
+
+    @Update
+    int update(List<ru.nikshlykov.schoolhelper.db.entities.Lesson> lesson);
 
     @Query("SELECT\n" +
             "l.Id Id, \n" +
@@ -29,4 +33,10 @@ public interface LessonDao {
 
     @Query("SELECT * FROM Lessons l WHERE l.Id == :lessonId")
     LiveData<ru.nikshlykov.schoolhelper.db.entities.Lesson> getLiveDataLessonById(long lessonId);
+
+    @Query("SELECT * FROM Lessons l WHERE l.ClassId == :classId AND l.DayOfWeekId == :dayOfWeek")
+    List<ru.nikshlykov.schoolhelper.db.entities.Lesson> getLessonsByDay(long classId, int dayOfWeek);
+
+    @Query("SELECT * FROM Subjects")
+    List<Subject> getLiveDataSubjects();
 }

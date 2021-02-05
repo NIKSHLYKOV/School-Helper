@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:id="@+id/fragment_edit_day_schedule___linear_layout___lesson1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="1 урок"
+            android:layout_gravity="center"/>
+        <Spinner
+            android:id="@+id/fragment_edit_day_schedule___spinner___lesson1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment_edit_day_schedule___linear_layout___lesson2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@+id/fragment_edit_day_schedule___linear_layout___lesson1">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="2 урок"
+            android:layout_gravity="center"/>
+        <Spinner
+            android:id="@+id/fragment_edit_day_schedule___spinner___lesson2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/fragment_edit_day_schedule___linear_layout___lesson3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@+id/fragment_edit_day_schedule___linear_layout___lesson2">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="3 урок"
+            android:layout_gravity="center"/>
+        <Spinner
+            android:id="@+id/fragment_edit_day_schedule___spinner___lesson3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment_edit_day_schedule___linear_layout___lesson4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@+id/fragment_edit_day_schedule___linear_layout___lesson3">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="4 урок"
+            android:layout_gravity="center"/>
+        <Spinner
+            android:id="@+id/fragment_edit_day_schedule___spinner___lesson4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment_edit_day_schedule___linear_layout___lesson5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@+id/fragment_edit_day_schedule___linear_layout___lesson4">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="5 урок"
+            android:layout_gravity="center"/>
+        <Spinner
+            android:id="@+id/fragment_edit_day_schedule___spinner___lesson5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment_edit_day_schedule___linear_layout___lesson6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@+id/fragment_edit_day_schedule___linear_layout___lesson5">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="6 урок"
+            android:layout_gravity="center"/>
+        <Spinner
+            android:id="@+id/fragment_edit_day_schedule___spinner___lesson6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment_edit_day_schedule___linear_layout___lesson7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@+id/fragment_edit_day_schedule___linear_layout___lesson6">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="7 урок"
+            android:layout_gravity="center"/>
+        <Spinner
+            android:id="@+id/fragment_edit_day_schedule___spinner___lesson7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fragment_edit_day_schedule___linear_layout___lesson8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp"
+        android:layout_below="@+id/fragment_edit_day_schedule___linear_layout___lesson7">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="8 урок"
+            android:layout_gravity="center"/>
+        <Spinner
+            android:id="@+id/fragment_edit_day_schedule___spinner___lesson8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fragment_edit_day_schedule___material_button___save"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentBottom="true"
+        android:text="Сохранить"
+
+        app:cornerRadius="20dp" />
+
+</RelativeLayout>

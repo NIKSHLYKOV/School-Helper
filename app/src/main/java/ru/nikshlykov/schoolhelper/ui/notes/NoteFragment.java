@@ -27,8 +27,6 @@ public class NoteFragment extends Fragment {
     private TextInputEditText noteNameEditText;
     private TextInputEditText noteTextEditText;
 
-    //TODO Проверить работу кнопки назад
-
     private NoteViewModel noteViewModel;
 
     private OnFragmentInteractionListener onFragmentInteractionListener;
@@ -89,8 +87,6 @@ public class NoteFragment extends Fragment {
                 imm.hideSoftInputFromWindow(saveButton.getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
 
-                // TODO Сделать popBackStack() в MainActivity. Иначе будет кнопка назад не так работать,
-                //  т.к. фрагемты будут добавляться в стек.
                 NavDirections navDirections = NoteFragmentDirections.actionNavNoteToNavNotes();
                 onFragmentInteractionListener.onFragmentInteraction(navDirections);
             }
